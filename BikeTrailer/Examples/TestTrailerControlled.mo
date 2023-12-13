@@ -23,9 +23,8 @@ model TestTrailerControlled "Test control of the trailer"
     annotation (Placement(transformation(extent={{10,20},{30,40}})));
   Modelica.Blocks.Sources.Constant fRef(k=0)
     annotation (Placement(transformation(extent={{-20,20},{0,40}})));
-  Modelica.Blocks.Sources.CombiTimeTable track(table=[0,0,0,0; 60,25,0,0; 120,25,
-        -5,0; 120,25,-5,0.1; 180,20,0,0.1; 180,20,0,-0.1; 240,30,5,-0.1; 240,30,
-        5,0; 300,25,0,0; 360,0,0,0; 420,0,0,0], extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
+  Modelica.Blocks.Sources.CombiTimeTable track(table=trackTable,
+                                                extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
@@ -43,6 +42,19 @@ model TestTrailerControlled "Test control of the trailer"
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-10,0})));
+protected
+  parameter Real trackTable[:, 4]={
+    {  0,  0,  0,  0.0},
+    { 60, 25,  0,  0.0},
+    {120, 25, -5,  0.0},
+    {120, 25, -5,  0.1},
+    {180, 20,  0,  0.1},
+    {180, 20,  0, -0.1},
+    {240, 30,  5, -0.1},
+    {240, 30,  5,  0.0},
+    {300, 25,  0,  0.0},
+    {360,  0,  0,  0.0},
+    {420,  0,  0,  0.0}} "time, velocity, windSpeed, inclination";
 equation
   connect(trailer.f, PID.u_m)
     annotation (Line(points={{20,11},{20,18}}, color={0,0,127}));
@@ -72,7 +84,7 @@ The time table <code>track</code> prescribes:
 <ul>
 <li>the velocity [km/h] of the <code>bike</code>.</li>
 <li>the wind speed [m/s] (positive = in direction of movement / from behind)</li>
-<li>the inclination = <code>tan(angle)</code>.</li>
+<li>the inclination = <code>tan(angle)</code> (positive = uphill).</li>
 </ul>
 <p>
 The bike is modeled as a prescribed speed, i.e. the biker is strong enough to reach the prescribed speed. 
