@@ -14,8 +14,8 @@ model Trailer "Model of a bike trailer"
   Modelica.Units.SI.Velocity v(displayUnit="km/h", start=0)=vehicle.v "Velocity of trailer";
   Modelica.Mechanics.Translational.Interfaces.Flange_a flange
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-  Modelica.Mechanics.Translational.Sensors.MultiSensor multiSensor
-    annotation (Placement(transformation(extent={{-60,10},{-80,-10}})));
+  Modelica.Mechanics.Translational.Sensors.MultiSensor multiSensorT
+    annotation (Placement(transformation(extent={{-70,10},{-90,-10}})));
   Modelica.Mechanics.Rotational.Sources.Torque torque annotation (Placement(
         transformation(
         extent={{10,-10},{-10,10}},
@@ -53,7 +53,7 @@ model Trailer "Model of a bike trailer"
     CrConstant=data.cr,
     useInclinationInput=useInclinationInput,
     inclinationConstant=inclinationConstant)
-    annotation (Placement(transformation(extent={{-20,-10},{-40,10}})));
+    annotation (Placement(transformation(extent={{-40,-10},{-60,10}})));
   Modelica.Blocks.Interfaces.RealOutput f(unit="N") "Force" annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -74,27 +74,36 @@ model Trailer "Model of a bike trailer"
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
         rotation=90,
         origin={-60,-120})));
+  Modelica.Mechanics.Rotational.Sensors.MultiSensor multiSensorR annotation (
+      Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=180,
+        origin={-20,0})));
 equation
-  connect(flange, multiSensor.flange_b)
-    annotation (Line(points={{-100,0},{-80,0}}, color={0,127,0}));
-  connect(multiSensor.flange_a, vehicle.flangeT)
-    annotation (Line(points={{-60,0},{-40,0}}, color={0,127,0}));
-  connect(vehicle.flangeR, torque.flange)
-    annotation (Line(points={{-20,0},{0,0}}, color={0,0,0}));
+  connect(flange, multiSensorT.flange_b)
+    annotation (Line(points={{-100,0},{-90,0}}, color={0,127,0}));
+  connect(multiSensorT.flange_a, vehicle.flangeT)
+    annotation (Line(points={{-70,0},{-60,0}}, color={0,127,0}));
   connect(torque.tau, drive.y) annotation (Line(points={{22,0},{25.5,0},{25.5,8.88178e-16},
           {29,8.88178e-16}}, color={0,0,127}));
   connect(drive.u, limiter.y) annotation (Line(points={{52,-1.9984e-15},{55.5,-1.9984e-15},
           {55.5,0},{59,0}}, color={0,0,127}));
   connect(limiter.u, tauRef)
     annotation (Line(points={{82,0},{120,0}}, color={0,0,127}));
-  connect(multiSensor.f, f) annotation (Line(points={{-70,11},{-70,80},{0,80},{
-          0,110}}, color={0,0,127}));
-  connect(cr, vehicle.cr) annotation (Line(points={{0,-120},{0,-30},{-30,-30},{-30,
-          -12}}, color={0,0,127}));
-  connect(vWind, vehicle.vWind) annotation (Line(points={{-60,-120},{-60,-20},{-36,
-          -20},{-36,-12}}, color={0,0,127}));
-  connect(inclination, vehicle.inclination) annotation (Line(points={{60,-120},{
-          60,-20},{-24,-20},{-24,-12},{-24,-12}}, color={0,0,127}));
+  connect(multiSensorT.f, f) annotation (Line(points={{-80,11},{-80,80},{0,80},
+          {0,110}}, color={0,0,127}));
+  connect(cr, vehicle.cr) annotation (Line(points={{0,-120},{0,-30},{-50,-30},{
+          -50,-12}},
+                 color={0,0,127}));
+  connect(vWind, vehicle.vWind) annotation (Line(points={{-60,-120},{-60,-20},{
+          -56,-20},{-56,-12}},
+                           color={0,0,127}));
+  connect(inclination, vehicle.inclination) annotation (Line(points={{60,-120},
+          {60,-20},{-44,-20},{-44,-12}},          color={0,0,127}));
+  connect(vehicle.flangeR, multiSensorR.flange_b) annotation (Line(points={{-40,
+          0},{-35,0},{-35,7.21645e-16},{-30,7.21645e-16}}, color={0,0,0}));
+  connect(multiSensorR.flange_a, torque.flange) annotation (Line(points={{-10,
+          -1.72085e-15},{-5,-1.72085e-15},{-5,0},{0,0}}, color={0,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
