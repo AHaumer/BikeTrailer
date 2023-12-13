@@ -13,7 +13,7 @@ record Data "Parameters of the bike trailer"
     annotation (Dialog(tab="Resistances", group="Air drag"));
   parameter Real cr=0.05 "Constant rolling resistance coefficient"
     annotation(Dialog(tab="Resistances", group="Rolling"));
-  //drive parmeters
+  //drive parameters
   parameter Modelica.Units.SI.Time Tsub=1E-3
     "Substitute time constant of trailer drives(s)"
     annotation (Dialog(tab="Drive"));

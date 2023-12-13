@@ -96,5 +96,16 @@ equation
   connect(inclination, vehicle.inclination) annotation (Line(points={{60,-120},{
           60,-20},{-24,-20},{-24,-12},{-24,-12}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    Documentation(info="<html>
+<p>
+The trailer model consists of:
+</p>
+<ul>
+<li>measurement of the force between bike and trailer: negative = trailer is braking</li>
+<li>the <a href=\"modelica://Modelica.Mechanics.Translational.Components.Vehicle\">trailer</a></li>
+<li>an ideal model of the current controlled drive: 
+    torque source, transfer function and limiter.</li>
+</ul>
+</html>"));
 end Trailer;
