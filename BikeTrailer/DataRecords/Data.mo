@@ -24,11 +24,14 @@ record Data "Parameters of the bike trailer"
   //controller parameters
   parameter Real kp=D/2 "Proportional gain of controller"
     annotation(Dialog(tab="Drive", group="Controller"));
-  parameter Real k(min=Modelica.Constants.eps, max=8/17)=0.01 "Inverse of Nd of controller"
+  parameter Modelica.Units.SI.Time TiPI=Tsub*4
+    "Integral time constant of PI-controller w/o D"
     annotation(Dialog(tab="Drive", group="Controller"));
   parameter Modelica.Units.SI.Time Ti=Tsub/2*(1 + sqrt((1 - k)/(1 + k)))
     "Integral time constant of controller"
     annotation (Dialog(tab="Drive", group="Controller"));
+  parameter Real k(min=Modelica.Constants.eps, max=8/17)=0.01 "Inverse of Nd of controller"
+    annotation(Dialog(tab="Drive", group="Controller"));
   parameter Modelica.Units.SI.Time Td=Tsub/((1 + k) + sqrt(1 - k^2))
     "Derivative time constant of controller"
     annotation (Dialog(tab="Drive", group="Controller"));

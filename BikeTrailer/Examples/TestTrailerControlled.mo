@@ -11,9 +11,9 @@ model TestTrailerControlled "Test control of the trailer"
   parameter DataRecords.Data data
     annotation (Placement(transformation(extent={{-10,60},{10,80}})));
   Modelica.Blocks.Continuous.LimPID PID(
-    controllerType=Modelica.Blocks.Types.SimpleController.PID,
+    controllerType=Modelica.Blocks.Types.SimpleController.PI,
     k=data.kp,
-    Ti=data.Ti,
+    Ti=data.TiPI,
     Td=data.Td,
     yMax=data.tauMax,
     yMin=data.tauMin,
