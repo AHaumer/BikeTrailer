@@ -36,7 +36,9 @@ model TestTrailerControlled "Test control of the trailer"
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-40,0})));
-  Modelica.Mechanics.Translational.Sources.Speed bike(s(fixed=false), exact=true)
+  Modelica.Mechanics.Translational.Sources.Speed bike(s(fixed=false),
+    exact=false,
+    f_crit=100)
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
