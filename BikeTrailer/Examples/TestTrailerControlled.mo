@@ -11,9 +11,9 @@ model TestTrailerControlled "Test control of the trailer"
   parameter DataRecords.Data data
     annotation (Placement(transformation(extent={{-10,60},{10,80}})));
   Modelica.Blocks.Continuous.LimPID PID(
-    controllerType=Modelica.Blocks.Types.SimpleController.PI,
+    controllerType=Modelica.Blocks.Types.SimpleController.PID,
     k=data.kp,
-    Ti=data.TiPI,
+    Ti=data.Ti,
     Td=data.Td,
     yMax=data.tauMax,
     yMin=data.tauMin,
@@ -62,7 +62,10 @@ equation
   connect(track.y[3], trailer.inclination) annotation (Line(points={{-69,0},{
           -60,0},{-60,-20},{26,-20},{26,-12}},
                                            color={0,0,127}));
-  annotation (experiment(StopTime=420, Interval=0.001), Documentation(info="<html>
+  annotation (experiment(
+      StopTime=420,
+      Interval=0.0005,
+      __Dymola_Algorithm="Dassl"),                      Documentation(info="<html>
 <p>
 The time table <code>track</code> prescribes:
 </p>
