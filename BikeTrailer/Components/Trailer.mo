@@ -1,5 +1,6 @@
 within BikeTrailer.Components;
 model Trailer "Model of a bike trailer"
+  extends Icons.TrailerIcon;
   parameter DataRecords.Data data
     annotation (Placement(transformation(extent={{60,60},{80,80}})));
   parameter Boolean useWindInput=false "Enable signal input for wind velocity";
@@ -94,31 +95,6 @@ equation
           -20},{-36,-12}}, color={0,0,127}));
   connect(inclination, vehicle.inclination) annotation (Line(points={{60,-120},{
           60,-20},{-24,-20},{-24,-12},{-24,-12}}, color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
-        Polygon(
-          points={{-90,4},{-74,4},{-74,-10},{-56,-36},{-42,-36},{-42,-46},{-56,-46},
-              {-82,-10},{-82,-6},{-90,-6},{-90,4}},
-          lineColor={0,0,0},
-          fillPattern=FillPattern.Sphere,
-          fillColor={175,175,175}),
-        Polygon(
-          points={{-60,-20},{80,-20},{60,-60},{-40,-60},{-60,-20}},
-          lineColor={28,108,200},
-          fillColor={0,255,128},
-          fillPattern=FillPattern.Solid),
-        Polygon(
-          points={{80,-20},{80,0},{58,60},{20,60},{-60,-20},{80,-20}},
-          lineColor={28,108,200},
-          fillColor={170,213,255},
-          fillPattern=FillPattern.Solid),
-        Text(
-          extent={{-100,100},{100,60}},
-          textColor={28,108,200},
-          textString="%name"),
-        Ellipse(
-          extent={{0,-42},{60,-100}},
-          lineColor={0,0,0},
-          fillColor={175,175,175},
-          fillPattern=FillPattern.Sphere)}),                     Diagram(
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Trailer;
