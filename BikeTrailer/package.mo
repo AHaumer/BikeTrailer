@@ -3,8 +3,8 @@ package BikeTrailer "Modeling an electrically driven bike trailer"
   extends Modelica.Icons.Package;
 
   annotation (preferredView="info",
-    version="1.2.0",
-    versionDate="2025-04-16",
+    version="1.3.0",
+    versionDate="2025-04-25",
     uses(Modelica(version="4.0.0")),
     Documentation(info="<html>
 <p>

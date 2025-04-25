@@ -30,7 +30,7 @@ model Trailer "Model of a bike trailer"
     annotation (Placement(transformation(extent={{-40,10},{-60,-10}})));
   Modelica.Blocks.Continuous.Integrator energyBike
     annotation (Placement(transformation(extent={{-30,20},{-10,40}})));
-  Modelica.Mechanics.Translational.Components.Vehicle vehicle(
+  Vehicle                                             vehicle(
     m=trailerData.m,
     J=trailerData.J,
     R=trailerData.D/2,
@@ -90,15 +90,17 @@ equation
     annotation (Line(points={{56,11},{56,30},{68,30}}, color={0,0,127}));
   connect(multiSensorBike.f, f) annotation (Line(points={{-50,11},{-50,80},{0,
           80},{0,110}}, color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)),
+  annotation (preferredView="info",
+  Icon(coordinateSystem(preserveAspectRatio=false)),
+  Diagram(coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
 <p>
 The trailer model consists of:
 </p>
 <ul>
 <li>measurement of the force between bike and trailer: negative = trailer is braking</li>
-<li>the <a href=\"modelica://Modelica.Mechanics.Translational.Components.Vehicle\">trailer</a></li>
+<li>the <a href=\"modelica://BikeTrailer.Components.Vehicle\">vehicle</a>: 
+    A more detailed explanation about driving resistances is included in <a href=\"modelica://BikeTrailer/Resources/Documentation/DrivingResistances.pdf\">this document</a>.</li>
 <li>a shaft where to couple (conditionally) the drive.</li>
 </ul>
 </html>"));
